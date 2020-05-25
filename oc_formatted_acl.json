@@ -1,0 +1,112 @@
+{
+    "openconfig-acl:name": "Capirca Conversion Example",
+    "openconfig-acl:type": "ACL_IPV4",
+    "openconfig-acl:config": {
+        "name": "Capirca Conversion Example",
+        "type": "ACL_IPV4",
+        "description": "Converted from Capirca pol file. TODO: Copy Capirca header."
+    },
+    "openconfig-acl:acl-entries": {
+        "acl-entry": [
+            {
+                "sequence-id": "0",
+                "config": {
+                    "sequence-id": 0,
+                    "description": "Optional - allow forwarding of DHCP requests"
+                },
+                "ipv4": {
+                    "config": {
+                        "protocol": "IP_UDP"
+                    }
+                },
+                "transport": {
+                    "config": {
+                        "destination-port": 67
+                    }
+                },
+                "actions": {
+                    "config": {
+                        "forwarding-action": "ACCEPT"
+                    }
+                }
+            },
+            {
+                "sequence-id": "1",
+                "config": {
+                    "sequence-id": 1,
+                    "description": "Allow name resolution using honestdns"
+                },
+                "ipv4": {
+                    "config": {
+                        "destination-address": "8.8.8.8/32",
+                        "protocol": "IP_UDP"
+                    }
+                },
+                "transport": {
+                    "config": {
+                        "destination-port": 53
+                    }
+                },
+                "actions": {
+                    "config": {
+                        "forwarding-action": "ACCEPT"
+                    }
+                }
+            },
+            {
+                "sequence-id": "2",
+                "config": {
+                    "sequence-id": 2,
+                    "description": "Allow tcp replies to internal hosts"
+                },
+                "ipv4": {
+                    "config": {
+                        "destination-address": "192.168.0.0/24",
+                        "protocol": "IP_TCP"
+                    }
+                },
+                "transport": {
+                    "config": {
+                        "tcp-flags": [
+                            "TCP_ACK"
+                        ]
+                    }
+                },
+                "actions": {
+                    "config": {
+                        "forwarding-action": "ACCEPT"
+                    }
+                }
+            },
+            {
+                "sequence-id": "3",
+                "config": {
+                    "sequence-id": 3,
+                    "description": "Deny access to rfc1918/internal"
+                },
+                "ipv4": {
+                    "config": {
+                        "destination-address": "192.168.0.0/24"
+                    }
+                },
+                "actions": {
+                    "config": {
+                        "forwarding-action": "DROP"
+                    }
+                }
+            },
+            {
+                "sequence-id": "4",
+                "config": {
+                    "sequence-id": 4,
+                    "description": "Allow what's left"
+                },
+                "actions": {
+                    "config": {
+                        "forwarding-action": "ACCEPT"
+                    }
+                }
+            }
+        ]
+    }
+}

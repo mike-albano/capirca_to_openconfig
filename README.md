@@ -1,9 +1,10 @@
-# capirca_openconfig
- Example to show from Capirca pol file to an OpenConfig formattet ACL.
+# capirca_to_openconfig
+ Simple Example to show from Capirca pol file to an OpenConfig formattet ACL.
 
-* JSON IETF output from this script: oc_formatted_acl.json
-* Capirca policy file: sample_cisco_lab.pol
-* Native Capirca output file: sample_cisco_lab.acl
+ If you'd prefer to just look at the files, they are included here:
+* oc_formatted_acl.json -- JSON IETF output from this script.
+* sample_cisco_lab.pol -- Capirca policy file
+* sample_cisco_lab.acl -- Native Capirca output file
 
 # Quickstart
 1. pip3 install pyangbind
@@ -12,7 +13,7 @@
 Relies on hardcoded files and assumptions.
 
 ## Caprica output
-To get the Capirca output of the policy used int his example, run the following
+To get the Capirca output of the policy used in this example, run the following
 Capirca command:
 ```
 python3 capirca/aclgen.py --policy_file sample_cisco_lab.pol --output_directory ./

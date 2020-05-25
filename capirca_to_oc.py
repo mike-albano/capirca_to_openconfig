@@ -81,7 +81,7 @@ def _create_configs(oc_formatted):
   Args:
     oc_formatted: (dict) OC ACL-friendly formatted terms.
   Returns:
-    acl_configs: (class) Populated objects.
+    acl_conf: (class) Populated objects.
   """
   acl_conf = CONFIGS.acl.acl_sets.acl_set.add(name='Capirca Conversion Example',
                                               type='ACL_IPV4')
@@ -107,6 +107,7 @@ def _create_configs(oc_formatted):
     sequence.actions.config.forwarding_action = rules['forwarding-action']
 
   print(pybindJSON.dumps(acl_conf, mode='ietf'))  # Print SetRequest() payload.
+  return acl_conf
 
 
 if __name__ == '__main__':
@@ -114,3 +115,4 @@ if __name__ == '__main__':
   acl_terms = _get_terms(pol_file)
   oc_formatted = fixup_terms(acl_terms)
   oc_config = _create_configs(oc_formatted)
+  # TODO: This is where you'd issue gNMI SetRequest()
